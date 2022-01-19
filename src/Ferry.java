@@ -27,6 +27,7 @@ public class Ferry {
                 throw new FerryIsFullException("Rejected");
             }
             giveFreeRide(car);
+            getNumberOfCarsWithSameColor(car);
         }catch (NumberOfCarsFullException e) {
             e.printStackTrace();
         } catch (NumberOfPeopleFullException e) {
@@ -52,6 +53,18 @@ public class Ferry {
         }
     }
 
+    private void getNumberOfCarsWithSameColor(Car car) {
+        int count = 0;
+        String color = "";
+        for (int i = 0; i < carCount.size(); i++) {
+            if (carCount.get(i).getColor().equals(car.getColor())) {
+                count += 1;
+                color = carCount.get(i).getColor();
+            }
+        }
+        System.out.println("Cars with color " + color + " are " + count);
+    }
+
     public int getNumberOfCarsAllowed() {
         return carCount.size();
     }
@@ -72,16 +85,14 @@ public class Ferry {
         Ferry ferry = new Ferry(10, 10);
 
         Car car = new Car("red", 4);
-        Car car2 = new Car("red", 4);
-        Car car3 = new Car("red", 4);
+        Car car2 = new Car("green", 4);
 
         ferry.board(car, 1);
         ferry.board(car, 1);
         ferry.board(car, 1);
         ferry.board(car, 1);
-        ferry.board(car, 1);
-        ferry.board(car, 1);
-        ferry.board(car, 1);
-        ferry.board(car, 1);
+        ferry.board(car2, 1);
+        ferry.board(car2, 1);
+        ferry.board(car2, 1);
     }
 }
