@@ -36,7 +36,6 @@ public class Ferry {
         }
     }
 
-
     private void giveFreeRide(Car car) {
         int count = 0;
 
@@ -46,9 +45,9 @@ public class Ferry {
             }
         }
 
-        if (count >= 3 && count < 7) {
+        if (count >= 3 && count <= 7) {
             System.out.println("Half price!");
-        } else if(count > 7) {
+        } else if(count >= 7) {
             System.out.println("Free Ride!");
         }
     }
