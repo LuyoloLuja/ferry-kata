@@ -9,8 +9,7 @@ public class Ferry {
     private final int numberOfCarsAllowed;
     private final int numberOfPeopleAllowed;
     private final List<Car> carCount = new ArrayList<>();
-    private final List<Integer> peopleCount = new ArrayList<>();
-    private final List<Car> carTrips = new ArrayList<>();
+    private int peopleCount;
 
     public Ferry(int numberOfCarsAllowed, int numberOfPeopleAllowed) {
         this.numberOfCarsAllowed = numberOfCarsAllowed;
@@ -19,23 +18,20 @@ public class Ferry {
 
     public void board(Car car, int peopleBoarding) {
         try {
-            if (getNumberOfCarsAllowed() < numberOfCarsAllowed) {
-                carCount.add(car);
-                System.out.println("Car Accepted");
-            } else {
-                throw new NumberOfCarsFullException("Car Rejected");
-            }
 
-            if (getNumberOfPeopleAllowed() < numberOfPeopleAllowed && peopleBoarding < numberOfPeopleAllowed) {
-                peopleCount.add(peopleBoarding);
-                System.out.println("Person/People Accepted");
+            if (getNumberOfCarsAllowed() < numberOfCarsAllowed && getNumberOfPeopleAllowed() < numberOfPeopleAllowed && peopleBoarding < numberOfPeopleAllowed) {
+                peopleCount++;
+                carCount.add(car);
+                System.out.println("Accepted");
             } else {
-                throw new NumberOfPeopleFullException("Person/People Rejected");
+                throw new FerryIsFullException("Rejected");
             }
-            System.out.println("trips: " + getCarTrips(car));
+            giveFreeRide(car);
         }catch (NumberOfCarsFullException e) {
             e.printStackTrace();
         } catch (NumberOfPeopleFullException e) {
+            e.printStackTrace();
+        } catch (FerryIsFullException e) {
             e.printStackTrace();
         }
     }
@@ -45,32 +41,39 @@ public class Ferry {
     }
 
     public int getNumberOfPeopleAllowed() {
-        int count = 0;
-        for (int i = 0; i < peopleCount.size(); i++) {
-            count += peopleCount.get(i);
-        }
-        return count;
+        return peopleCount;
     }
 
-    public int getCarTrips(Car car) {
-//        TO DO -- FIX THIS METHOD WHEN I GET HOME
-//        ADD NESTED LOOP TO LOOP THROUGH carTrips TO FIGURE OUT HOW MANY CARS ON EACH FERRY TRIP
+    public void giveFreeRide(Car car) {
         int count = 0;
 
         for (int i = 0; i < carCount.size(); i++) {
             if (carCount.get(i) == car) {
-                carTrips.add(car);
-                count += carTrips.size();
+                count += 1;
             }
         }
-        return count;
+
+        if (count >= 3 && count < 7) {
+            System.out.println("Half price!");
+        } else if(count > 7) {
+            System.out.println("Free Ride!");
+        }
     }
 
     public static void main(String[] args) throws FerryIsFullException {
-        Car car = new Car("red", 4);
-        Ferry ferry = new Ferry(5, 5);
+        Ferry ferry = new Ferry(10, 10);
 
-        ferry.board(car, 2);
-        ferry.board(car, 3);
+        Car car = new Car("red", 4);
+        Car car2 = new Car("red", 4);
+        Car car3 = new Car("red", 4);
+
+        ferry.board(car, 1);
+        ferry.board(car, 1);
+        ferry.board(car, 1);
+        ferry.board(car, 1);
+        ferry.board(car, 1);
+        ferry.board(car, 1);
+        ferry.board(car, 1);
+        ferry.board(car, 1);
     }
 }

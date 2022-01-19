@@ -1,7 +1,7 @@
 package exceptions;
 
 public class FerryIsFullException extends Exception {
-    FerryIsFullException(String errorMessage) {
+    public FerryIsFullException(String errorMessage) {
         super(errorMessage);
     }
 }
