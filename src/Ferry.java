@@ -19,7 +19,7 @@ public class Ferry {
     public void board(Car car, int peopleBoarding) {
         try {
 
-            if (getNumberOfCarsAllowed() < numberOfCarsAllowed && getNumberOfPeopleAllowed() < numberOfPeopleAllowed && peopleBoarding < numberOfPeopleAllowed) {
+            if (isLessThanCars() && isLessThanPeople(peopleBoarding)) {
                 peopleCount++;
                 carCount.add(car);
                 System.out.println("Accepted");
@@ -36,15 +36,8 @@ public class Ferry {
         }
     }
 
-    public int getNumberOfCarsAllowed() {
-        return carCount.size();
-    }
 
-    public int getNumberOfPeopleAllowed() {
-        return peopleCount;
-    }
-
-    public void giveFreeRide(Car car) {
+    private void giveFreeRide(Car car) {
         int count = 0;
 
         for (int i = 0; i < carCount.size(); i++) {
@@ -58,6 +51,22 @@ public class Ferry {
         } else if(count > 7) {
             System.out.println("Free Ride!");
         }
+    }
+
+    public int getNumberOfCarsAllowed() {
+        return carCount.size();
+    }
+
+    public int getNumberOfPeopleAllowed() {
+        return peopleCount;
+    }
+
+    private boolean isLessThanCars() {
+        return getNumberOfCarsAllowed() < numberOfCarsAllowed;
+    }
+
+    private boolean isLessThanPeople(int peopleBoarding) {
+        return getNumberOfPeopleAllowed() < numberOfPeopleAllowed && peopleBoarding < numberOfPeopleAllowed;
     }
 
     public static void main(String[] args) throws FerryIsFullException {
