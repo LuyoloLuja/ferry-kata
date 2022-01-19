@@ -10,6 +10,7 @@ public class Ferry {
     private final int numberOfPeopleAllowed;
     private final List<Car> carCount = new ArrayList<>();
     private final List<Integer> peopleCount = new ArrayList<>();
+    private final List<Integer> carTrips = new ArrayList<>();
 
     public Ferry(int numberOfCarsAllowed, int numberOfPeopleAllowed) {
         this.numberOfCarsAllowed = numberOfCarsAllowed;
@@ -51,18 +52,13 @@ public class Ferry {
         return count;
     }
 
-//    public int getCarsWithSameColorOnFerry() {
-//
-//    }
-
     public void getCarTrips(Car car) {
-//        TO DO -- FIGURE OUT WHATS WRONG WITH METHOD WHEN I GET HOME
-        int carTrips = 0;
+//        TO DO -- FIGURE OUT WHAT'S WRONG WITH METHOD WHEN I GET HOME
 
         for (int i = 0; i < carCount.size(); i++) {
             if (carCount.get(i) == car) {
-                carTrips++;
-                if (carTrips > 3) {
+                carTrips.add(1);
+                if (carTrips.size() > 3) {
                     System.out.println("Half Price");
                 }
             }
