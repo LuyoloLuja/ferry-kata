@@ -1,6 +1,6 @@
 public class Car {
     private String color;
-    private int passengerCount;
+    private final int passengerCount;
 
     public Car(String color, int passengerCount) {
         this.color = color;
@@ -8,6 +8,7 @@ public class Car {
     }
 
     public String getColor() {
+        color = color.substring(0, 1).toUpperCase() + color.substring(1).toLowerCase();
         return color;
     }
 
