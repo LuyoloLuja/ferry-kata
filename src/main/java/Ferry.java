@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Ferry {
+
     private final int numberOfCarsAllowed;
     private final int numberOfPeopleAllowed;
     private int peopleCount;
